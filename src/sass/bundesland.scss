@@ -1,25 +1,76 @@
+$site-max-width-small: 500px;
+$site-max-width-medium: 800px;
+$bundesland-box-color: #eeeeee;
+$header-color: #dddddd;
+
+@mixin respond-to($media) {
+  @if $media == small-screen {
+    @media only screen and (max-width: $site-max-width-small) {
+      @content;
+    }
+  } @else if $media == medium-screen {
+    @media only screen and (min-width: $site-max-width-small + 1) and (max-width: $site-max-width-medium) {
+      @content;
+    }
+  } @else if $media == wide-screen {
+    @media only screen and (min-width: $site-max-width-medium + 1) {
+      @content;
+    }
+  }
+}
+
 body {
   font-family: arial, sans-serif;
   margin: 0;
   padding: 0;
   background: #fff;
-}
 
-h1 {
-  padding: 10px 20px 7px 20px;
-  margin: 0;
-  color: #666;
-  background: #ddd;
-  text-transform: uppercase;
-}
+  h1 {
+    padding: 10px 20px 7px 20px;
+    margin: 0;
+    color: #666;
+    background: #ddd;
+    text-transform: uppercase;
+  }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .content {
+    //centralize div
+    margin: auto;
+    //global max-width
+    max-width: 1024px;
 
-ul li {
+    @include respond-to(handhelds) {
+      width: 100%;
+    }
+    @include respond-to(medium-screens) {
+      width: 100%;
+    }
+
+    .header {
+      margin-bottom: 10px;
+    }
+
+    #states {
+
+      .state-container-wrapper {
+        width: 33%;
+        background-color: $bundesland-box-color;
+        padding: 10px;
+
+        @include respond-to(handhelds) {
+          width: 100%;
+        }
+        @include respond-to(medium-screens) {
+          width: 50%;
+        }
+
+        .state-container {
+          background-color: white;
+          padding: 10px;
+        }
+      }
+    }
+  }
 }
 
 ul#persons li {

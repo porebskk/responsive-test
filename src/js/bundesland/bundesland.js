@@ -1,5 +1,12 @@
 (function () {
     angular.module('bundesland', [
-        'bundesland.controller.index'
+        //controller
+        'bundesland.controller.index',
+
+        //service
+        'bundesland.service.repository.bundesland',
+
+        //directive
+        'bundesland.directive.state'
     ]);
 })();

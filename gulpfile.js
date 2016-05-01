@@ -3,12 +3,14 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
+    order = require('gulp-order'),
     sass = require('gulp-sass'),
+    embedTemplates = require('gulp-angular-embed-templates'),
     merge = require('merge-stream');
 
 // lints all JS files in src/js
 gulp.task('lint', function () {
-    return gulp.src('./src/js/*.js')
+    return gulp.src('./src/js/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -17,21 +19,26 @@ gulp.task('lint', function () {
 // concat js script files to app.js and do the same with as minified
 gulp.task('scripts', function () {
     //prepare beauty code
-    var appJs = gulp.src(['./bower_components/angular/angular.js', './src/js/*.js'])
+    var appJs = gulp.src([
+            './src/js/**/*.js'
+        ])
+        .pipe(embedTemplates())
+        .pipe(gulp.src([
+            './bower_components/angular/angular.js',
+            './bower_components/angular-resource/angular-resource.js'
+        ]))
+        .pipe(order([
+            'bower_components/angular/angular.js',
+            'bower_components/**/*.js',
+            'src/js/**/*.js'
+        ]))
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./js'));
 
-    //prepare ugly code
-    var minifiedAppJs = merge(
-        gulp.src('./bower_components/angular/angular.min.js'),
-        gulp.src('./src/js/*.js')
-            .pipe(uglify())
-    )
-        .pipe(concat('app.min.js'))
-        .pipe(gulp.dest('./js'));
+    //TODO minify
 
     //run both in parallel
-    return merge(appJs, minifiedAppJs);
+    return appJs;
 });
 
 // sassify
