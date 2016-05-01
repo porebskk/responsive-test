@@ -1,0 +1,21 @@
+{
+  "name": "angular-agentur",
+  "description": "",
+  "main": "js/app.js",
+  "authors": [
+    "Kevin Porebski <kevin.porebski@outlook.de>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5"
+  }
+}
