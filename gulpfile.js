@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    merge = require('merge-stream');
 
 // lints all JS files in src/js
 gulp.task('lint', function () {
@@ -13,14 +14,24 @@ gulp.task('lint', function () {
 });
 
 
-// concat js script files to app.js then minifies to app.min.js
+// concat js script files to app.js and do the same with as minified
 gulp.task('scripts', function () {
-    return gulp.src(['./bower_components/angular/angular.js', './src/js/*.js'])
+    //prepare beauty code
+    var appJs = gulp.src(['./bower_components/angular/angular.js', './src/js/*.js'])
         .pipe(concat('app.js'))
-        .pipe(gulp.dest('./js'))
-        .pipe(rename('app.min.js'))
-        .pipe(uglify())
         .pipe(gulp.dest('./js'));
+
+    //prepare ugly code
+    var minifiedAppJs = merge(
+        gulp.src('./bower_components/angular/angular.min.js'),
+        gulp.src('./src/js/*.js')
+            .pipe(uglify())
+    )
+        .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('./js'));
+
+    //run both in parallel
+    return merge(appJs, minifiedAppJs);
 });
 
 // sassify
