@@ -1,3 +1,7 @@
+Install dependencies with `npm install` (Requires npm which is installed with node.js)  
+Run server on localhost:8080 with `npm start`  
+Watch files with `gulp watch`  
+
 Exercise:
 
 Please create a HTML file (using „index.html“ as a starting point), which loads data from "bundesland.json" using JavaScript.
