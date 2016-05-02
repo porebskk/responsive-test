@@ -13,15 +13,42 @@ body {
     margin: auto;
     max-width: 1024px; }
     body .content .header {
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      margin-right: 5px;
+      margin-left: 5px; }
     body .content #states .state-container-wrapper {
-      width: 33%;
-      background-color: #eeeeee;
-      padding: 10px; }
-      body .content #states .state-container-wrapper .state-container {
-        background-color: white;
+      width: 33.33333%;
+      float: left; }
+      @media only screen and (max-width: 500px) {
+        body .content #states .state-container-wrapper {
+          width: 100%; } }
+      @media only screen and (min-width: 501px) and (max-width: 800px) {
+        body .content #states .state-container-wrapper {
+          width: 50%; } }
+      body .content #states .state-container-wrapper .state-container-border {
+        background-color: #eeeeee;
+        margin: 5px;
         padding: 10px; }
-
-ul#persons li {
-  text-transform: uppercase;
-  background-color: #ddd; }
+        body .content #states .state-container-wrapper .state-container-border .state-container {
+          background-color: white;
+          padding: 10px; }
+          body .content #states .state-container-wrapper .state-container-border .state-container .state-name {
+            white-space: nowrap;
+            overflow: hidden; }
+          body .content #states .state-container-wrapper .state-container-border .state-container .school-count {
+            color: #AAAAAA;
+            font-size: 14px;
+            margin-top: 3px; }
+    body .content #persons {
+      clear: both; }
+      body .content #persons person {
+        background-color: #dddddd;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        width: 30px;
+        height: 30px;
+        float: left;
+        text-transform: uppercase;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 30px; }

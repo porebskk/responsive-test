@@ -7,6 +7,7 @@
         'bundesland.service.repository.bundesland',
 
         //directive
-        'bundesland.directive.state'
+        'bundesland.directive.state',
+        'bundesland.directive.person'
     ]);
 })();
